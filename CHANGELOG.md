@@ -4,6 +4,20 @@ All notable changes to this project are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/);
 versioning follows [Semantic Versioning](https://semver.org/).
 
+## [0.2.2] — 2026-11-11
+
+Documentation and price-template release; no behaviour change.
+
+### Added
+
+- README: a "official price reference" section with DeepSeek API prices (deepseek-flash peak 2 / 0.04 / 8, off-peak 1 / 0.02 / 4; deepseek-v4-pro peak 9 / 0.3 / 27, off-peak 4.5 / 0.15 / 13.5, CNY per 1M tokens), the peak window rule (Beijing time, Mon–Fri, 09:00–12:00 and 14:00–18:00) and the caveat that statutory holidays are priced as peak because the plugin has no holiday calendar.
+- `prices.json`: two more model entries in the blank template — `deepseek-account/deepseek-flash` and `deepseek-account/deepseek-v4-pro` (all unit prices `null`; model count 53 → 55).
+- The npm package now ships `README.zh.md` and `CHANGELOG.md`.
+
+### Changed
+
+- `package.json`: added `repository`, `homepage` and `bugs`, so the npm page links back to the source.
+
 ## [0.2.1] — 2026-11-11
 
 Published on npm. Keeps the composer chip in sync with a running, streaming turn.
@@ -38,11 +52,3 @@ First public release on npm.
 - Cost is an estimate derived from a user-supplied price table; DSH itself reports tokens only.
 - Web GUI only (`dsh.client.platform = "web"`).
 - `engines.dsh: ">=0.2.2-rc.1"`.
-
-## [Unreleased]
-
-Planned for 0.2.2 (repository metadata polish, no behaviour change):
-
-- Add `repository`, `homepage` and `bugs` to `package.json`.
-- Ship `README.zh.md` and `CHANGELOG.md` inside the npm package (`files` whitelist).
-- Align the npm-facing README with the repository's bilingual READMEs.

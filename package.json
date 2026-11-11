@@ -1,6 +1,6 @@
 {
   "name": "dsh-token-cost-report",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Per-day, per-model token usage and spend for DeepSeek Harness: a conversation spend chip in the composer, a sidebar usage page, peak/off-peak pricing, date ranges and CSV export",
   "keywords": [
     "deepseek-harness",
@@ -33,7 +33,9 @@
     "prices.json",
     "README.md",
     "PUBLISHING.md",
-    "LICENSE"
+    "LICENSE",
+    "README.zh.md",
+    "CHANGELOG.md"
   ],
   "dsh": {
     "bundle": {
@@ -54,5 +56,13 @@
       "optional": true
     }
   },
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhuzhubondbond/dsh-token-cost-report.git"
+  },
+  "homepage": "https://github.com/zhuzhubondbond/dsh-token-cost-report#readme",
+  "bugs": {
+    "url": "https://github.com/zhuzhubondbond/dsh-token-cost-report/issues"
+  }
 }
