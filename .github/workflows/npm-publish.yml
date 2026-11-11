@@ -1,0 +1,62 @@
+name: Publish to npm
+
+# Publishing paths, tried in this order:
+#   1. OIDC trusted publishing (recommended): no secret needed. Configure the
+#      trusted publisher on npmjs.com -> package Settings (or the package's
+#      "Trusted publisher" section) with:
+#        Publisher: GitHub Actions
+#        Repository: zhuzhubondbond/dsh-token-cost-report
+#        Workflow:   npm-publish.yml
+#   2. Repository secret NPM_TOKEN: a granular access token with "Read and write"
+#      (not "stage only") that may bypass 2FA. Used only when the secret exists.
+#
+# A manual run (workflow_dispatch) never publishes: it only does a dry run.
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+
+      - name: Check the tag matches package.json
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          tag="${GITHUB_REF_NAME#v}"
+          version="$(node -p "require('./package.json').version")"
+          echo "tag=$tag version=$version"
+          if [ "$tag" != "$version" ]; then
+            echo "::error::tag $tag does not match package.json version $version"
+            exit 1
+          fi
+
+      - name: Packaging contract
+        run: node scripts/verify-package.mjs
+
+      - name: Dry run
+        if: github.event_name == 'workflow_dispatch'
+        run: npm publish --provenance --access public --dry-run
+
+      - name: Publish with NPM_TOKEN
+        if: github.event_name == 'push' && secrets.NPM_TOKEN != ''
+        run: npm publish --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish with OIDC trusted publishing
+        if: github.event_name == 'push' && secrets.NPM_TOKEN == ''
+        run: npm publish --provenance --access public

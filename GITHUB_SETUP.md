@@ -142,3 +142,59 @@ npm publish --access public               # 用带 Read and write 的 token；�
 1. 确认 README / 插件详情页图文完整（官方市场会展示长描述与图标）；
 2. 按官方公布的提交入口提交包名 `dsh-token-cost-report` 与版本；
 3. 同步更新 `marketplace/index.json` 以便社区索引也能装到新版本。
+
+## 10. GitHub Pages：托管插件索引（自动化）
+
+仓库已带 `.github/workflows/pages.yml`：push 到 `main`（且改动 `marketplace/` 或该 workflow）时，先用官方校验器验证索引，再把 `marketplace/` 发布到 Pages。
+
+一次性设置（只有仓库所有者能做）：
+
+1. 打开 Settings → **Pages** → Build and deployment → **Source** 选 **GitHub Actions**；
+2. 去 Actions 页手动跑一次 **Deploy plugin index to Pages**（或 push 一次 marketplace 改动）；
+3. 部署成功后的索引地址：
+
+```text
+https://zhuzhubondbond.github.io/dsh-token-cost-report/index.json
+```
+
+之后在 DSH：插件 → 实验性「自定义插件索引」→ 发现 → 添加索引源 → 填上面的 URL。
+
+> 索引里的 `icon` 是相对路径 `icons/dsh-token-cost-report.svg`，Pages 会解析成同目录文件，无需改 JSON。
+
+## 11. 自动发布到 npm（GitHub Actions）
+
+仓库已带 `.github/workflows/npm-publish.yml`：push 形如 `v0.2.3` 的 tag 时自动发布，发布前会校验 tag 与 `package.json` 版本一致，并跑打包契约检查。
+
+两种认证方式：
+
+**A. OIDC trusted publishing（推荐，无需任何 token）**
+
+1. 打开 <https://www.npmjs.com/package/dsh-token-cost-report/access> → **Trusted publishing**（Trusted Publisher）；
+2. 填：
+   - Publisher: **GitHub Actions**
+   - Repository: `zhuzhubondbond/dsh-token-cost-report`
+   - Workflow filename: `npm-publish.yml`
+   - Environment: 留空
+3. 保存后 push tag 即自动发布（带 provenance）。
+
+**B. 仓库 secret `NPM_TOKEN`（备用）**
+
+1. 在 npm 生成 **Read and write（非 stage only）** 且勾 **Bypass 2FA** 的 granular token；
+2. 仓库 Settings → Secrets and variables → Actions → 新建 `NPM_TOKEN`；
+3. 之后 push tag 时 workflow 会优先用它发布。
+
+> 手动触发（workflow_dispatch）只做 `--dry-run`，不会真的发布。
+
+## 12. 发一个新版本的标准流程
+
+```pwsh
+cd D:\Harness\plugins\dsh-token-cost-report
+npm version patch --no-git-tag-version     # 0.2.2 -> 0.2.3
+node D:\Harness\tools\verify-package.mjs  # 本地契约检查
+npm publish --access public                # 或省略，交给 CI
+cd D:\Harness\repo\dsh-token-cost-report
+node D:\Harness\tools\sync-publish.mjs    # 同步文件、回填索引时间戳
+git add -A; git commit -m "release: 0.2.3"; git tag v0.2.3; git push origin main v0.2.3
+```
+
+配置了 §11 的 OIDC 后，`npm publish` 可省略：push tag 后由 Actions 发布（tag 与 package.json 版本必须一致）。

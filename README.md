@@ -2,6 +2,9 @@
 
 English | [中文](README.zh.md)
 
+[![npm version](https://img.shields.io/npm/v/dsh-token-cost-report)](https://www.npmjs.com/package/dsh-token-cost-report)
+[![license](https://img.shields.io/npm/l/dsh-token-cost-report)](LICENSE)
+
 Per-day, per-model token usage and spend for [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness):
 
 - **Composer spend chip** — accumulated cost of the current conversation (including all sub-agent sessions); expand it to see the four token buckets, sub-agent breakdown, per-model totals and the latest daily usage. While a turn is still streaming the chip re-checks the live token projection and refreshes itself instead of showing a stale figure.
