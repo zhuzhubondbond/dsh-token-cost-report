@@ -1,6 +1,6 @@
 {
   "name": "dsh-token-cost-report",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Per-day, per-model token usage and spend for DeepSeek Harness: a conversation spend chip in the composer, a sidebar usage page, peak/off-peak pricing, date ranges and CSV export",
   "keywords": [
     "deepseek-harness",

@@ -4,9 +4,23 @@ All notable changes to this project are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/);
 versioning follows [Semantic Versioning](https://semver.org/).
 
+## [0.2.1] — 2026-11-11
+
+Published on npm. Keeps the composer chip in sync with a running, streaming turn.
+
+### Fixed
+
+- The spend chip could show a stale figure while a step was still streaming: the host's cached per-session row predates the live token projection. The chip now compares its cached token buckets with the live `usage` sample and forces a rebuild when they differ.
+- Forced rebuilds are throttled (at most one every 2 s, at most 6 per mount) so a stale report cannot trigger one rebuild per rendered step.
+- Added a timed-out state and a disabled style for the chip button while a forced rebuild is pending, so repeated clicks during a slow rebuild do nothing instead of queueing.
+
+### Added
+
+- Hover and disabled styles for the composer chip button.
+
 ## [0.2.0] — 2026-11-10
 
-First public release on npm (`npm i dsh-token-cost-report` / install through Plugin Manager).
+First public release on npm.
 
 ### Added
 
@@ -27,7 +41,7 @@ First public release on npm (`npm i dsh-token-cost-report` / install through Plu
 
 ## [Unreleased]
 
-Planned for 0.2.1 (repository metadata polish, no behaviour change):
+Planned for 0.2.2 (repository metadata polish, no behaviour change):
 
 - Add `repository`, `homepage` and `bugs` to `package.json`.
 - Ship `README.zh.md` and `CHANGELOG.md` inside the npm package (`files` whitelist).

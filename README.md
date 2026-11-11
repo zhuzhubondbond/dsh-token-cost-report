@@ -4,7 +4,7 @@ English | [中文](README.zh.md)
 
 Per-day, per-model token usage and spend for [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness):
 
-- **Composer spend chip** — accumulated cost of the current conversation (including all sub-agent sessions); expand it to see the four token buckets, sub-agent breakdown, per-model totals and the latest daily usage.
+- **Composer spend chip** — accumulated cost of the current conversation (including all sub-agent sessions); expand it to see the four token buckets, sub-agent breakdown, per-model totals and the latest daily usage. While a turn is still streaming the chip re-checks the live token projection and refreshes itself instead of showing a stale figure.
 - **Sidebar page "Usage & Cost"** — total tokens / total spend / today's spend / session count; monthly day×model tables; per-conversation (sub-agents merged) and per-session tables.
 - **Peak / off-peak pricing** — two tiers driven by a local-time schedule (bucket decided by the completion time of each settlement), or a flat unit price.
 - **Date ranges** — last 7 / 30 / 90 days or all time; cards and tables recompute for the selected range ("today" stays today).
@@ -20,7 +20,7 @@ Requires DSH ≥ `0.2.2-rc.1` (Web GUI; both the desktop app and `dsh web` work)
 1. Open the DSH Web GUI → sidebar **Plugins** (or Settings → Plugins).
 2. In the "install bundle" box, enter any of:
    - npm package name: `dsh-token-cost-report`;
-   - absolute path to the local directory or a `.tgz` bundle;
+   - absolute path to the local directory or a `.tgz` bundle (for example `D:\path\to\dsh-token-cost-report-0.2.1.tgz`);
    - a Git address such as `git+https://github.com/zhuzhubond/dsh-token-cost-report.git`.
 3. The plugin is enabled by default after installation; refresh the page to see the sidebar entry and the chip.
 
@@ -29,7 +29,7 @@ Requires DSH ≥ `0.2.2-rc.1` (Web GUI; both the desktop app and `dsh web` work)
 ```pwsh
 # pnpm is bundled with the desktop app
 dsh plugin --profile desktop install dsh-token-cost-report
-# local tarball: dsh plugin --profile desktop install D:\path\to\dsh-token-cost-report-0.2.0.tgz
+# local tarball: dsh plugin --profile desktop install D:\path\to\dsh-token-cost-report-0.2.1.tgz
 ```
 
 ### Option C — local development (profile patch, bypasses the installer)
@@ -116,7 +116,7 @@ node bin/report.mjs --prices ./my.json  # explicit price table
 
 ## Development
 
-See [PUBLISHING.md](PUBLISHING.md) for package layout, renaming constraints, packaging/publishing steps and local verification.
+See [PUBLISHING.md](PUBLISHING.md) for package layout, renaming constraints, packaging/publishing steps and local verification, and [GITHUB_SETUP.md](GITHUB_SETUP.md) for the repository, `dsh-plugin` topic, release and market-index steps.
 
 ## License
 

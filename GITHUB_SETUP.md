@@ -3,6 +3,16 @@
 > 这个目录已经是**可以直接推送到 GitHub 的仓库根**：插件源码 + 双语 README + CHANGELOG + 演示脚本 + 插件索引。
 > 下面命令默认 GitHub 用户名 `zhuzhubond`（与你的 npm 账号同名，已确认该账号存在）；**若不是你的账号，全局替换**。
 
+## 发布记录（npm）
+
+| 版本 | 时间（UTC） | 状态 |
+|---|---|---|
+| 0.2.0 | 2026-11-10T07:15:50Z（staging 占位）→ 实际首发见 `npm view` | 已被 0.2.1 取代 |
+| 0.2.1 | 2026-11-11T07:17:28Z | **live**，`latest` 指向 0.2.1 |
+
+> 注意：首次发布时用了一个 **stage-only** token，registry 里会保留一条 `0.0.0-stage` 占位版本（`npm view dsh-token-cost-report versions` 可见）。
+> `latest` 已指向 0.2.1，按包名安装拿到的就是 0.2.1；占位版本无实际内容，可忽略（如需清理：npmjs.com → Settings → Staged Packages → Reject，需 2FA）。
+
 ## 0. 先确认身份
 
 ```pwsh
@@ -20,7 +30,7 @@ git config user.email
 cd D:\Harness\repo\dsh-token-cost-report
 git init -b main
 git add -A
-git commit -m "chore: dsh-token-cost-report 0.2.0 — token usage & cost report for DeepSeek Harness"
+git commit -m "chore: dsh-token-cost-report 0.2.1 - token usage & cost report for DeepSeek Harness"
 ```
 
 ## 2. 创建 GitHub 仓库并推送
@@ -58,21 +68,27 @@ curl -X PUT -H "Authorization: Bearer <你的 GitHub token>" `
 ## 4. 建 Release，附上 tgz
 
 ```pwsh
-gh release create v0.2.0 D:\Harness\dist\dsh-token-cost-report-0.2.0.tgz `
-  --title "v0.2.0 — first public release" `
+gh release create v0.2.1 D:\Harness\dist\dsh-token-cost-report-0.2.1.tgz `
+  --title "v0.2.1 - chip stays live while a turn streams" `
   --notes-file CHANGELOG.md
 ```
 
-> 没有 `gh` 就在网页 Release 里手动上传 `D:\Harness\dist\dsh-token-cost-report-0.2.0.tgz`。
+> 没有 `gh` 就在网页 Release 里手动上传 `D:\Harness\dist\dsh-token-cost-report-0.2.1.tgz`。
 > 用户也可以用 Git 安装：`dsh plugin --profile desktop install git+https://github.com/zhuzhubond/dsh-token-cost-report.git`。
 
-## 5. 修正插件索引里的发布时间
+## 5. 回填插件索引里的发布时间
 
-`marketplace/index.json` 里 `publishTimestamp: 0` 是占位。发布到 npm 后执行：
+`marketplace/index.json` 里 `publishTimestamp` 必须和 registry 的真实发布时间一致。一条命令完成（同时会把 npm 包里的改动同步到本仓库并刷新中文 README）：
 
 ```pwsh
-cd D:\Harness\repo\dsh-token-cost-report
-node -e "const fs=require('fs');const cp=require('child_process');const t=JSON.parse(cp.execSync('npm view dsh-token-cost-report time --json',{encoding:'utf8'}));const sec=Math.floor(new Date(t['0.2.0']).getTime()/1000);const p='marketplace/index.json';const j=JSON.parse(fs.readFileSync(p,'utf8'));j.plugins[0].versions[0].publishTimestamp=sec;fs.writeFileSync(p,JSON.stringify(j,null,2)+'\n');console.log('publishTimestamp =',sec)"
+node D:\Harness\tools\sync-publish.mjs
+```
+
+它读取 `package.json` 的版本、从 registry 取该版本的发布时间、更新 `marketplace/index.json`，然后可用官方校验器复验：
+
+```pwsh
+cd D:\Harness\.verify-market
+node check.mjs
 ```
 
 ## 6. 发布索引，让插件在「发现」里可安装
@@ -84,9 +100,9 @@ DSH **不内置任何索引源**：索引是任意静态主机上的 `index.json
 
 之后在 DSH：**插件 → 实验性 → 自定义插件索引（开关）→ 发现 → 添加索引源**，填入上面的 URL。
 
-## 7. 下一步：0.2.1（仓库元数据）
+## 7. 下一步：0.2.2（仓库元数据）
 
-当前 `package.json` 还没有 `repository` / `homepage` / `bugs`，npm 页面不会显示源码链接。建议 0.2.1 补上（改动小、独立于功能）：
+0.2.1 已发布，但 `package.json` 还没有 `repository` / `homepage` / `bugs`，npm 页面不会显示源码链接。0.2.2 补上（改动小、独立于功能）：
 
 ```jsonc
 "repository": { "type": "git", "url": "git+https://github.com/zhuzhubond/dsh-token-cost-report.git" },
@@ -100,14 +116,20 @@ DSH **不内置任何索引源**：索引是任意静态主机上的 `index.json
 
 ```pwsh
 cd D:\Harness\plugins\dsh-token-cost-report
-npm version patch --no-git-tag-version   # 0.2.0 -> 0.2.1
+npm version patch --no-git-tag-version   # 0.2.1 -> 0.2.2
 node D:\Harness\tools\verify-package.mjs
-npm publish --access public --otp=<当前验证码>   # 或先配好 bypass-2FA token
+npm publish --access public               # 用带 Read and write 的 token；无需 OTP
 ```
 
 > 注意：`lib/client.js` 里的客户端 bundle id 必须与包名一致；本包已是 `dsh-token-cost-report`，改元数据不影响。
 
-## 8. 官方市场开放后
+## 8. token 与发布方式（重要）
+
+- 首次发布用了一个 **Read and write (stage only)** 的 granular token，发布走的是 staging（registry 出现 `0.0.0-stage` 占位），之后才转为 0.2.1 live。
+- 以后直接发布，建议新建 granular token：权限选 **Read and write**（**不要**选 stage only），勾选 **Bypass 2FA**，包范围 **All packages**；写进 `.npmrc` 后 `npm publish` 不再需要 OTP。
+- 2027 年 1 月 npm 会移除 bypass-2FA token 的直发能力，届时改用 **GitHub Actions + OIDC trusted publishing**（可另外配置）。
+
+## 9. 官方市场开放后
 
 官方计划中的市场尚未随客户端发布（当前 0.2.2-rc.1 只有实验性自定义索引）。届时：
 
