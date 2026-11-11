@@ -67,7 +67,10 @@ curl -X PUT -H "Authorization: Bearer <你的 GitHub token>" `
 
 ## 4. 建 Release，附上 tgz（已完成）
 
-> 已完成：tag `v0.2.1`，附件 `dsh-token-cost-report-0.2.1.tgz`（SHA1 `f8b1b402…`，与 npm shasum 一致）。
+> 已完成：
+> - `v0.2.1`，附件 `dsh-token-cost-report-0.2.1.tgz`（SHA1 `f8b1b402…`）
+> - `v0.2.2`，附件 `dsh-token-cost-report-0.2.2.tgz`（SHA1 `6042d41c…`）
+> 两个版本的 Release 附件 SHA1 均与 npm `dist.shasum` 一致。
 > 以后发版请按下方命令，tag 与附件版本必须一致。
 
 ```pwsh
