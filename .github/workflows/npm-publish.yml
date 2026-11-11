@@ -1,14 +1,13 @@
 name: Publish to npm
 
-# Publishing paths, tried in this order:
+# Publishing paths:
 #   1. OIDC trusted publishing (recommended): no secret needed. Configure the
-#      trusted publisher on npmjs.com -> package Settings (or the package's
-#      "Trusted publisher" section) with:
-#        Publisher: GitHub Actions
+#      trusted publisher in the npm package settings ("Trusted publishing"):
+#        Publisher:  GitHub Actions
 #        Repository: zhuzhubondbond/dsh-token-cost-report
 #        Workflow:   npm-publish.yml
 #   2. Repository secret NPM_TOKEN: a granular access token with "Read and write"
-#      (not "stage only") that may bypass 2FA. Used only when the secret exists.
+#      (not "stage only") that may bypass 2FA. When present it takes precedence.
 #
 # A manual run (workflow_dispatch) never publishes: it only does a dry run.
 
@@ -51,12 +50,15 @@ jobs:
         if: github.event_name == 'workflow_dispatch'
         run: npm publish --provenance --access public --dry-run
 
-      - name: Publish with NPM_TOKEN
-        if: github.event_name == 'push' && secrets.NPM_TOKEN != ''
-        run: npm publish --provenance --access public
+      - name: Publish
+        if: github.event_name == 'push'
+        run: |
+          if [ -n "${NPM_TOKEN:-}" ]; then
+            echo "publishing with NPM_TOKEN"
+          else
+            echo "publishing with OIDC trusted publishing"
+          fi
+          npm publish --provenance --access public
         env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      - name: Publish with OIDC trusted publishing
-        if: github.event_name == 'push' && secrets.NPM_TOKEN == ''
-        run: npm publish --provenance --access public
