@@ -1,0 +1,297 @@
+{
+  "currency": "CNY",
+  "note": "模板：单价单位是「每 1,000,000 tokens」。把 input/output 改成数字即可计价；cacheRead/cacheWrite 省略时按 input 单价。input 或 output 为 null 的模型视为未定价（不会算成 0 元）。带峰谷分档的模型可以加 \"offPeak\": { \"input\": 0, \"output\": 0, \"cacheRead\": 0 }，并按 offPeakSchedule 判定高峰/空闲。这个文件首次运行会复制到 $DSH_HOME/token-usage-prices.json，编辑那一份即可，插件升级不会覆盖。",
+  "providers": {
+    "volcengine": {
+      "currency": "CNY",
+      "models": {
+        "kimi-k3-1-pro-261024": {
+          "input": null,
+          "output": null,
+          "cacheRead": null
+        },
+        "deepseek-v4-1-flash-economy-261017": {
+          "input": null,
+          "output": null,
+          "cacheRead": null
+        },
+        "deepseek-v4-1-flash-261017": {
+          "input": null,
+          "output": null,
+          "cacheRead": null
+        },
+        "doubao-seedream-5-0-flash-260915": {
+          "input": null,
+          "output": null,
+          "cacheRead": null
+        },
+        "doubao-seed-2-1-pro-260915": {
+          "input": null,
+          "output": null,
+          "cacheRead": null
+        },
+        "deepseek-v4-1-flash-260910": {
+          "input": null,
+          "output": null,
+          "cacheRead": null
+        },
+        "glm-5-3-flash-260828": {
+          "input": null,
+          "output": null,
+          "cacheRead": null
+        },
+        "doubao-seed-2-1-lite-260915": {
+          "input": null,
+          "output": null,
+          "cacheRead": null
+        },
+        "deepseek-v4-pro-ga-260813": {
+          "input": null,
+          "output": null,
+          "cacheRead": null
+        },
+        "deepseek-v4-flash-ga-260731": {
+          "input": null,
+          "output": null,
+          "cacheRead": null
+        },
+        "doubao-seedance-2-5-260628": {
+          "input": null,
+          "output": null,
+          "cacheRead": null
+        },
+        "doubao-seedream-5-0-pro-260628": {
+          "input": null,
+          "output": null,
+          "cacheRead": null
+        },
+        "glm-5-2-260617": {
+          "input": null,
+          "output": null,
+          "cacheRead": null
+        },
+        "doubao-seed-evolving": {
+          "input": null,
+          "output": null,
+          "cacheRead": null
+        },
+        "doubao-seed-character-260628": {
+          "input": null,
+          "output": null,
+          "cacheRead": null
+        },
+        "doubao-seed-2-1-turbo-260628": {
+          "input": null,
+          "output": null,
+          "cacheRead": null
+        },
+        "doubao-seed-2-1-pro-260628": {
+          "input": null,
+          "output": null,
+          "cacheRead": null
+        },
+        "doubao-seedance-2-0-mini-260615": {
+          "input": null,
+          "output": null,
+          "cacheRead": null
+        },
+        "deepseek-v4-pro-260425": {
+          "input": null,
+          "output": null,
+          "cacheRead": null
+        },
+        "doubao-seed-2-0-lite-260428": {
+          "input": null,
+          "output": null,
+          "cacheRead": null
+        },
+        "doubao-seed-2-0-mini-260428": {
+          "input": null,
+          "output": null,
+          "cacheRead": null
+        },
+        "doubao-seedream-4-0-20260415": {
+          "input": null,
+          "output": null,
+          "cacheRead": null
+        },
+        "doubao-seed3d-2-0-260328": {
+          "input": null,
+          "output": null,
+          "cacheRead": null
+        },
+        "hitem3d-2-0-251223": {
+          "input": null,
+          "output": null,
+          "cacheRead": null
+        },
+        "hyper3d-gen2-260112": {
+          "input": null,
+          "output": null,
+          "cacheRead": null
+        },
+        "doubao-seed-2-0-code-preview-260215": {
+          "input": null,
+          "output": null,
+          "cacheRead": null
+        },
+        "doubao-seedance-2-0-fast-260128": {
+          "input": null,
+          "output": null,
+          "cacheRead": null
+        },
+        "doubao-seed-2-0-pro-260215": {
+          "input": null,
+          "output": null,
+          "cacheRead": null
+        },
+        "doubao-seedream-5-0-260128": {
+          "input": null,
+          "output": null,
+          "cacheRead": null
+        },
+        "doubao-seedance-2-0-260128": {
+          "input": null,
+          "output": null,
+          "cacheRead": null
+        },
+        "doubao-seed-character-251128": {
+          "input": null,
+          "output": null,
+          "cacheRead": null
+        },
+        "doubao-embedding-vision-251215": {
+          "input": null,
+          "output": null,
+          "cacheRead": null
+        },
+        "doubao-seedream-4-5-251128": {
+          "input": null,
+          "output": null,
+          "cacheRead": null
+        },
+        "qwen3-14b-20250429": {
+          "input": null,
+          "output": null,
+          "cacheRead": null
+        },
+        "qwen3-0-6b-20250429": {
+          "input": null,
+          "output": null,
+          "cacheRead": null
+        },
+        "doubao-seedance-1-0-pro-fast-251015": {
+          "input": null,
+          "output": null,
+          "cacheRead": null
+        },
+        "doubao-smart-router-250928": {
+          "input": null,
+          "output": null,
+          "cacheRead": null
+        },
+        "doubao-seed-translation-250915": {
+          "input": null,
+          "output": null,
+          "cacheRead": null
+        },
+        "doubao-seedream-4-0-250828": {
+          "input": null,
+          "output": null,
+          "cacheRead": null
+        },
+        "qwen2-5-72b-20240919": {
+          "input": null,
+          "output": null,
+          "cacheRead": null
+        },
+        "qwen3-32b-20250429": {
+          "input": null,
+          "output": null,
+          "cacheRead": null
+        },
+        "qwen3-8b-20250429": {
+          "input": null,
+          "output": null,
+          "cacheRead": null
+        },
+        "glm-4-5-air-20250728": {
+          "input": null,
+          "output": null,
+          "cacheRead": null
+        },
+        "doubao-embedding-vision-250615": {
+          "input": null,
+          "output": null,
+          "cacheRead": null
+        },
+        "doubao-seedance-1-0-pro-250528": {
+          "input": null,
+          "output": null,
+          "cacheRead": null
+        },
+        "doubao-embedding-large-text-250515": {
+          "input": null,
+          "output": null,
+          "cacheRead": null
+        },
+        "doubao-seedance-1-0-lite-t2v-250428": {
+          "input": null,
+          "output": null,
+          "cacheRead": null
+        },
+        "doubao-seedance-1-0-lite-i2v-250428": {
+          "input": null,
+          "output": null,
+          "cacheRead": null
+        },
+        "doubao-embedding-vision-250328": {
+          "input": null,
+          "output": null,
+          "cacheRead": null
+        },
+        "doubao-embedding-vision-241215": {
+          "input": null,
+          "output": null,
+          "cacheRead": null
+        },
+        "doubao-embedding-large-text-240915": {
+          "input": null,
+          "output": null,
+          "cacheRead": null
+        },
+        "doubao-embedding-text-240715": {
+          "input": null,
+          "output": null,
+          "cacheRead": null
+        },
+        "doubao-embedding-text-240515": {
+          "input": null,
+          "output": null,
+          "cacheRead": null
+        }
+      }
+    }
+  },
+  "offPeakSchedule": {
+    "timeZone": "Asia/Shanghai",
+    "peakDays": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "peakWindows": [
+      [
+        "09:00",
+        "12:00"
+      ],
+      [
+        "14:00",
+        "18:00"
+      ]
+    ],
+    "note": "空闲时段=高峰窗口之外（含周末全天、工作日午休与夜间）。按请求完成时间判定，与官方口径一致。"
+  }
+}

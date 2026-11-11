@@ -1,0 +1,39 @@
+{
+  "format": 1,
+  "title": {
+    "en": "zhuzhubond's plugins",
+    "zh": "zhuzhubond 的插件"
+  },
+  "description": {
+    "en": "Plugins maintained by zhuzhubond for DeepSeek Harness.",
+    "zh": "zhuzhubond 维护的 DeepSeek Harness 插件。"
+  },
+  "plugins": [
+    {
+      "name": "dsh-token-cost-report",
+      "title": {
+        "en": "Token Usage & Cost Report",
+        "zh": "用量与成本"
+      },
+      "description": {
+        "en": "Per-day, per-model token usage and spend: a conversation spend chip in the composer, a sidebar usage page, peak/off-peak pricing, date ranges and CSV export.",
+        "zh": "按日、按模型的 token 用量与花费统计：输入框下方的对话花费胶囊、侧边栏用量页、峰谷分时计价、时间范围筛选与 CSV 导出。"
+      },
+      "icon": "icons/dsh-token-cost-report.svg",
+      "author": "zhuzhubond",
+      "homepage": "https://www.npmjs.com/package/dsh-token-cost-report",
+      "versions": [
+        {
+          "version": "0.2.0",
+          "publishTimestamp": 0,
+          "source": {
+            "type": "npm"
+          },
+          "engines": {
+            "dsh": ">=0.2.2-rc.1"
+          }
+        }
+      ]
+    }
+  ]
+}

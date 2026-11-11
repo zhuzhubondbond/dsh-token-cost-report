@@ -1,0 +1,5 @@
+# Bundle patch: mounting this package as a profile bundle inserts exactly one
+# Loader row, resolved by package name from the profile's node_modules.
+- insert:
+    - id: token-usage
+      name: 'dsh-token-cost-report'

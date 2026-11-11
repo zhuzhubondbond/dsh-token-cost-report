@@ -1,0 +1,58 @@
+{
+  "name": "dsh-token-cost-report",
+  "version": "0.2.0",
+  "description": "Per-day, per-model token usage and spend for DeepSeek Harness: a conversation spend chip in the composer, a sidebar usage page, peak/off-peak pricing, date ranges and CSV export",
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "token",
+    "usage",
+    "cost",
+    "dashboard"
+  ],
+  "type": "module",
+  "main": "lib/index.js",
+  "bin": {
+    "dsh-token-usage-report": "bin/report.mjs"
+  },
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./aggregate": "./lib/aggregate.mjs",
+    "./prices.json": "./prices.json",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/entry.js",
+    "lib/client.js",
+    "lib/aggregate.mjs",
+    "bin/report.mjs",
+    "cordis.patch.yml",
+    "prices.json",
+    "README.md",
+    "PUBLISHING.md",
+    "LICENSE"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web"
+    }
+  },
+  "engines": {
+    "dsh": ">=0.2.2-rc.1"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "~4.1.0"
+  },
+  "peerDependenciesMeta": {
+    "@deepseek-ai/cordis": {
+      "optional": true
+    }
+  },
+  "license": "MIT"
+}
