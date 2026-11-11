@@ -65,7 +65,10 @@ curl -X PUT -H "Authorization: Bearer <你的 GitHub token>" `
   -d '{"names":["dsh-plugin","deepseek-harness","dsh"]}'
 ```
 
-## 4. 建 Release，附上 tgz
+## 4. 建 Release，附上 tgz（已完成）
+
+> 已完成：tag `v0.2.1`，附件 `dsh-token-cost-report-0.2.1.tgz`（SHA1 `f8b1b402…`，与 npm shasum 一致）。
+> 以后发版请按下方命令，tag 与附件版本必须一致。
 
 ```pwsh
 gh release create v0.2.1 D:\Harness\dist\dsh-token-cost-report-0.2.1.tgz `
