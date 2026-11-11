@@ -20,7 +20,7 @@
         "zh": "按日、按模型的 token 用量与花费统计：输入框下方的对话花费胶囊、侧边栏用量页、峰谷分时计价、时间范围筛选与 CSV 导出。"
       },
       "icon": "icons/dsh-token-cost-report.svg",
-      "author": "zhuzhubond",
+      "author": "zhuzhubondbond",
       "homepage": "https://www.npmjs.com/package/dsh-token-cost-report",
       "versions": [
         {

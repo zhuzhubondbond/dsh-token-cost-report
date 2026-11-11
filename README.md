@@ -21,7 +21,7 @@ Requires DSH ≥ `0.2.2-rc.1` (Web GUI; both the desktop app and `dsh web` work)
 2. In the "install bundle" box, enter any of:
    - npm package name: `dsh-token-cost-report`;
    - absolute path to the local directory or a `.tgz` bundle (for example `D:\path\to\dsh-token-cost-report-0.2.1.tgz`);
-   - a Git address such as `git+https://github.com/zhuzhubond/dsh-token-cost-report.git`.
+   - a Git address such as `git+https://github.com/zhuzhubondbond/dsh-token-cost-report.git`.
 3. The plugin is enabled by default after installation; refresh the page to see the sidebar entry and the chip.
 
 ### Option B — CLI

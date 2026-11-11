@@ -1,7 +1,7 @@
 # 发布到 GitHub 与插件索引（操作清单）
 
 > 这个目录已经是**可以直接推送到 GitHub 的仓库根**：插件源码 + 双语 README + CHANGELOG + 演示脚本 + 插件索引。
-> 下面命令默认 GitHub 用户名 `zhuzhubond`（与你的 npm 账号同名，已确认该账号存在）；**若不是你的账号，全局替换**。
+> 下面命令默认 GitHub 用户名 `zhuzhubondbond`（你的 GitHub 账号，已确认存在；npm 用户名是 zhuzhubond，两者不同）；**若不是你的账号，全局替换**。
 
 ## 发布记录（npm）
 
@@ -20,7 +20,7 @@ cd D:\Harness\repo\dsh-token-cost-report
 git config user.name
 git config user.email
 # 若未配置：
-# git config --global user.name "zhuzhubond"
+# git config --global user.name "zhuzhubondbond"
 # git config --global user.email "你的邮箱"
 ```
 
@@ -42,14 +42,14 @@ git commit -m "chore: dsh-token-cost-report 0.2.1 - token usage & cost report fo
 3. 创建后按页面提示执行：
 
 ```pwsh
-git remote add origin https://github.com/zhuzhubond/dsh-token-cost-report.git
+git remote add origin https://github.com/zhuzhubondbond/dsh-token-cost-report.git
 git push -u origin main
 ```
 
 **方式 B：gh CLI（若已安装）**
 
 ```pwsh
-gh repo create zhuzhubond/dsh-token-cost-report --public --source . --remote origin --push
+gh repo create zhuzhubondbond/dsh-token-cost-report --public --source . --remote origin --push
 ```
 
 ## 3. 加 `dsh-plugin` topic（官方点名的发现方式）
@@ -61,7 +61,7 @@ gh repo create zhuzhubond/dsh-token-cost-report --public --source . --remote ori
 ```pwsh
 curl -X PUT -H "Authorization: Bearer <你的 GitHub token>" `
   -H "Accept: application/vnd.github+json" `
-  https://api.github.com/repos/zhuzhubond/dsh-token-cost-report/topics `
+  https://api.github.com/repos/zhuzhubondbond/dsh-token-cost-report/topics `
   -d '{"names":["dsh-plugin","deepseek-harness","dsh"]}'
 ```
 
@@ -74,7 +74,7 @@ gh release create v0.2.1 D:\Harness\dist\dsh-token-cost-report-0.2.1.tgz `
 ```
 
 > 没有 `gh` 就在网页 Release 里手动上传 `D:\Harness\dist\dsh-token-cost-report-0.2.1.tgz`。
-> 用户也可以用 Git 安装：`dsh plugin --profile desktop install git+https://github.com/zhuzhubond/dsh-token-cost-report.git`。
+> 用户也可以用 Git 安装：`dsh plugin --profile desktop install git+https://github.com/zhuzhubondbond/dsh-token-cost-report.git`。
 
 ## 5. 回填插件索引里的发布时间
 
@@ -95,7 +95,7 @@ node check.mjs
 
 DSH **不内置任何索引源**：索引是任意静态主机上的 `index.json`（+ `icons/`）。任选一种托管：
 
-- GitHub Pages：把 `marketplace/` 设为 Pages 目录，索引地址形如 `https://zhuzhubond.github.io/dsh-token-cost-report/index.json`；
+- GitHub Pages：把 `marketplace/` 设为 Pages 目录，索引地址形如 `https://zhuzhubondbond.github.io/dsh-token-cost-report/index.json`；
 - 对象存储 / 任意 https 静态站：上传 `index.json` 与 `icons/`，保持两者同级引用关系。
 
 之后在 DSH：**插件 → 实验性 → 自定义插件索引（开关）→ 发现 → 添加索引源**，填入上面的 URL。
@@ -105,9 +105,9 @@ DSH **不内置任何索引源**：索引是任意静态主机上的 `index.json
 0.2.1 已发布，但 `package.json` 还没有 `repository` / `homepage` / `bugs`，npm 页面不会显示源码链接。0.2.2 补上（改动小、独立于功能）：
 
 ```jsonc
-"repository": { "type": "git", "url": "git+https://github.com/zhuzhubond/dsh-token-cost-report.git" },
-"homepage": "https://github.com/zhuzhubond/dsh-token-cost-report#readme",
-"bugs": { "url": "https://github.com/zhuzhubond/dsh-token-cost-report/issues" },
+"repository": { "type": "git", "url": "git+https://github.com/zhuzhubondbond/dsh-token-cost-report.git" },
+"homepage": "https://github.com/zhuzhubondbond/dsh-token-cost-report#readme",
+"bugs": { "url": "https://github.com/zhuzhubondbond/dsh-token-cost-report/issues" },
 "files": ["lib/index.js","lib/entry.js","lib/client.js","lib/aggregate.mjs","bin/report.mjs",
           "cordis.patch.yml","prices.json","README.md","README.zh.md","CHANGELOG.md","LICENSE"]
 ```
