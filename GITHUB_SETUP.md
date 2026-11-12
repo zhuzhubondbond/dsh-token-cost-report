@@ -159,6 +159,8 @@ https://zhuzhubondbond.github.io/dsh-token-cost-report/index.json
 
 之后在 DSH：插件 → 实验性「自定义插件索引」→ 发现 → 添加索引源 → 填上面的 URL。
 
+已验证（HTTP 200，`application/json`，与仓库 `marketplace/index.json` 内容一致；图标同为 200）：https://zhuzhubondbond.github.io/dsh-token-cost-report/index.json
+
 > 索引里的 `icon` 是相对路径 `icons/dsh-token-cost-report.svg`，Pages 会解析成同目录文件，无需改 JSON。
 
 ## 11. 自动发布到 npm（GitHub Actions）

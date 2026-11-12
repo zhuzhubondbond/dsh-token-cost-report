@@ -43,6 +43,14 @@ dsh plugin --profile desktop install dsh-token-cost-report
 
 > 注意：**同一个包只能有一个活动来源**。已经用 patch 挂载时不要再安装 bundle，反之亦然，否则启动时会报重复来源。
 
+### 方式 D：通过「发现」安装（插件索引）
+
+在 DSH 里打开 **插件 → 实验性「自定义插件索引」→ 发现 → 添加索引源**，填入：
+
+```text
+https://zhuzhubondbond.github.io/dsh-token-cost-report/index.json
+```
+
 ## 第一次使用：填价格
 
 DSH 内核只上报 token、不记录任何货币单价，所以成本由本插件按价目表估算。

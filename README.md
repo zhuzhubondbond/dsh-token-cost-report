@@ -46,6 +46,14 @@ dsh plugin --profile desktop install dsh-token-cost-report
 
 > Note: a package may have only **one active source**. Do not mount it through a patch and also install the bundle — DSH refuses duplicate loader sources at startup.
 
+### Option D — Discover (plugin index)
+
+Add this index URL in DSH: **Plugins → experimental "custom plugin index" → Discover → add index source**:
+
+```text
+https://zhuzhubondbond.github.io/dsh-token-cost-report/index.json
+```
+
 ## First run: fill in prices
 
 The DSH kernel reports tokens but no monetary price, so this plugin estimates cost from a price table.
